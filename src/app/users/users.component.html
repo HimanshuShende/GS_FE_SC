@@ -1,0 +1,33 @@
+<div class="container table-users">
+    <div style="margin-bottom: 20px;">
+        <span>No. of Users per page </span>
+        <!-- <input type="number" > -->
+        <select placeholder="per_page" [(ngModel)]="per_page" (change)="loadUsers()">
+            <option *ngFor="let pages of getPagesList()" [value]='pages'>{{ pages }}</option>
+        </select>
+    </div>
+    <table>
+        <thead>
+            <tr id="tableHead">
+                <td *ngFor="let head of table_headers;">{{ head | uppercase}}</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td> <img [src]="user.avatar" alt=""> </td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.email }}</td>
+                <td class="action">  
+                    <img class="drop_down" src="https://img.icons8.com/fluent/48/000000/menu-2.png" alt=""> 
+                    <ul class="drop_menu">
+                        <li (click)="updateUser(user.id)">Edit</li>
+                        <li (click)="deleteUser(user.id, $event)">Delete</li>
+                    </ul>
+                </td>
+                <!-- <td>{{ user.id }}</td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
