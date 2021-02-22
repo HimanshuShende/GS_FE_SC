@@ -1,7 +1,8 @@
 <div class="container table-users">
     <div style="margin-bottom: 20px;">
         <span>No. of Users per page </span>
-        <!-- <input type="number" > -->
+        <!-- following option tags fetches the per page users value  -->
+        <!-- calls the loadUsers method every time the value changes -->
         <select placeholder="per_page" [(ngModel)]="per_page" (change)="loadUsers()">
             <option *ngFor="let pages of getPagesList()" [value]='pages'>{{ pages }}</option>
         </select>
@@ -9,10 +10,13 @@
     <table>
         <thead>
             <tr id="tableHead">
+                <!-- Looping over tabel_headers array, which is created using UserEnum(defined in formatter/formatter.ts) -->
                 <td *ngFor="let head of table_headers;">{{ head | uppercase}}</td>
             </tr>
         </thead>
+        <!-- Currently API only return 12 users(maximum)  -->
         <tbody>
+            <!-- Looping over user array -->
             <tr *ngFor="let user of users">
                 <td> <img [src]="user.avatar" alt=""> </td>
                 <td>{{ user.first_name }}</td>
@@ -26,6 +30,7 @@
                     </ul>
                 </td>
                 <!-- <td>{{ user.id }}</td> -->
+                <!-- here add the extra <td> according to the UserEnum (defined in formatters/formatter.ts)  -->
             </tr>
         </tbody>
     </table>
